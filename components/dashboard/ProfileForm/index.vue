@@ -42,7 +42,7 @@ const { handleSubmit } = useForm({
     last_name: user.value?.last_name,
     email: user.value?.email,
     password: '',
-    description: user.value?.description
+    description: user.value?.description || ''
   }
 });
 

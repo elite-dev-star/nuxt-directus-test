@@ -15,37 +15,38 @@ services:
     networks:
       - directus_network
     healthcheck:
-      test: ["CMD", "pg_isready", "-U", "directus"]
+      test: ["CMD", "pg_isready", "-U", "postgres"]
       interval: 30s
       timeout: 5s
       retries: 5
 
   directus:
-      image: directus/directus:latest
-      container_name: directus_app
-      environment:
-        PUBLIC_URL: ${PUBLIC_URL}
-        KEY: ${DIRECTUS_KEY}
-        SECRET: ${DIRECTUS_SECRET}
-        DB_CLIENT: pg
-        DB_HOST: database
-        DB_PORT: 5432
-        DB_DATABASE: ${POSTGRES_DB}
-        DB_USER: ${POSTGRES_USER}
-        DB_PASSWORD: ${POSTGRES_PASSWORD}
-        ADMIN_EMAIL: ${ADMIN_EMAIL}
-        ADMIN_PASSWORD: ${ADMIN_PASSWORD}
-        CONTENT_SECURITY_POLICY_DIRECTIVES__FRAME_ANCESTORS: "array:http://localhost:3000 http://localhost:8055,self"
-        CORS_ENABLED: 'true'
-        CORS_ORIGIN: '*'
-
-      depends_on:
-        - database
-      ports:
-        - "8055:8055"
-      restart: unless-stopped
-      networks:
-        - directus_network
+    image: directus/directus:latest
+    container_name: directus
+    environment:
+      PUBLIC_URL: ${PUBLIC_URL}
+      KEY: ${DIRECTUS_KEY}
+      SECRET: ${DIRECTUS_SECRET}
+      DB_CLIENT: pg
+      DB_HOST: database
+      DB_PORT: 5432
+      DB_DATABASE: ${POSTGRES_DB}
+      DB_USER: ${POSTGRES_USER}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+      ADMIN_EMAIL: ${ADMIN_EMAIL}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+      CONTENT_SECURITY_POLICY_DIRECTIVES__FRAME_ANCESTORS: "array:http://localhost:3000 http://localhost:8055,self"
+      CORS_ENABLED: 'true'
+      CORS_ORIGIN: '*'
+    volumes:
+      - directus-volume:/directus/snapshots
+    depends_on:
+      - database
+    ports:
+      - "8055:8055"
+    restart: unless-stopped
+    networks:
+      - directus_network
 
   nuxt:
     image: nuxtjs/nuxt:latest
@@ -72,3 +73,4 @@ networks:
 
 volumes:
   directus_data:
+  directus-volume:
