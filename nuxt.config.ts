@@ -1,5 +1,7 @@
+// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
+  devtools: { enabled: true },
   modules: ['@nuxtjs/tailwindcss', 'nuxt-directus'],
   typescript: {
     typeCheck: true
@@ -7,10 +9,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       directus: {
-        url: 'http://localhost:8055/',
-        devtools: true,
-        cookieMaxAge: 10000,
-      },
+        url: "http://127.0.0.1:8055"
+      }
     }
   }
-});
+})
