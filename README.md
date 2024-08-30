@@ -17,15 +17,19 @@
    ```bash
    docker-compose up --build -d
    ```
-2. Setup DB in directus
+2. Apply Snapshots
 
-  Only run below commands once:
+   ```bash
+   docker cp ./snapshot.yml directus:/directus/snapshots
+   ```
 
-   ```docker cp ./snapshot.yml directus:/directus/snapshots```
+   ```bash
+   docker exec -it directus npx directus schema apply ./snapshots/snapshot.yml
+   ```
 
-   ```docker exec -it directus npx directus schema apply ./snapshots/snapshot.yml```
-
-   ```docker restart directus```
+   ```bash
+   docker restart directus
+   ```
 
 3. Access the application:
    - 🚀 Nuxt App: `http://localhost:3000`
