@@ -18,6 +18,10 @@
 import { useForm } from 'vee-validate';
 import * as Yup from 'yup';
 
+definePageMeta({
+  middleware: ['guest'],
+});
+
 const { login } = useDirectusAuth();
 
 const schema = Yup.object({
