@@ -4,7 +4,10 @@
       <h1 class="text-2xl font-bold">Items List</h1>
       <CommonButton label="Add new item" @click="openNewDialog"></CommonButton>
     </div>
-    <table class="w-full">
+    <div class="flex justify-center items-center min-h-20">
+      <div>No data</div>
+    </div>
+    <table v-if="items?.length" class="w-full">
       <thead>
         <tr>
           <th v-for="column in columns" class="py-2 px-4 font-bold border-b border-gray-200 text-left capitalize">

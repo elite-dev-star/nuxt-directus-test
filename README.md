@@ -35,6 +35,10 @@
    - 🚀 Nuxt App: `http://localhost:3000`
    - 🐰 Directus Admin: `http://localhost:8055`
 
+4. Admin Credentail
+    - Email: `john@gmail.com`
+    - Password: `abcABC123!@#`
+
 ## Environment Variables Reference Table
 
 | Variable                                       | Description                                                   |
